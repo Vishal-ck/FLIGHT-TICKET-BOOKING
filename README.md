@@ -3,6 +3,7 @@
 This is  a console based backend application developed with node ,express,mongodb.
 
 USER USE CASES
+--------------
 
 1.Search for Flights based on Date and time:
 
@@ -30,6 +31,7 @@ ex:http:/localhost:3000/myBookings/60a6dc65f57d3a3fc0e3dbd6
 
 
 ADMIN USE CASES
+---------------
 
 1.Add Flights
 
