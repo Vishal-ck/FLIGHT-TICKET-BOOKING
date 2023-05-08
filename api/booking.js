@@ -56,4 +56,29 @@ router.get("/myBookings/:userId", async (req, res) => {
   }
 });
 
+//ADMIN Access to list all the bookings based on FlightNumber and Time
+
+router.get("/bookings/:flightNumber/:date/:time", async (req, res) => {
+  const { flightNumber, date, time } = req.params;
+  const departureTime = new Date(`${date}T${time}:00.000Z`);
+
+  try {
+    const flight = await Flight.findOne({ flightNumber });
+    if (!flight) {
+      return res.send({ message: "Flight not found" });
+    }
+
+    const bookings = await Booking.find({
+      flight: flight._id,
+      bookingTime: { $gte: departureTime },
+    });
+
+    res.send(bookings);
+  } catch (err) {
+    console.log(err);
+    res.send({ message: "Error getting bookings" });
+  }
+});
+
+
 module.exports = router;
