@@ -1,67 +1,97 @@
 # FLIGHT-TICKET-BOOKING
 
-This is  a console based backend application developed with node ,express,mongodb.
+This is a console-based backend application developed using Node.js, Express.js, and MongoDB. It allows users to search for flights, book tickets, and manage their bookings. Additionally, administrators can add and remove flights and view bookings based on flight information.
 
 USER USE CASES
 --------------
 
-1.Search for Flights based on Date and time:
+To search for flights based on date and time, use the GET method with the following URL:
 
-use the GET method with the url http:/localhost/flight/search?date=<yyyy-mm-dd>&time=<hh:mm>
-here we are sending the date and time for filtering in the params.
+http://localhost/flight/search?date=<date>&time=<hh:mm>
 
-2.Booking tickets on a flight based on availability (assuming the default
-seat count is 60)
+Replace <date> with the desired date.
+Replace <hh:mm> with the desired time.
 
-here we use the Post method with the url /booking/flightNumber/Date/Time
-ex:http://localhost:3000/bookings/DL104/2022-05-11/08:00
-in the body send the following data seats booked and userId:
+This endpoint filters flights based on the provided date and time.
+
+2. Booking Tickets on a Flight based on Availability
+
+To book tickets on a flight, use the POST method with the following URL format:
+
+http://localhost:3000/bookings/<flightNumber>/<Date>/<Time>
+
+Replace <flightNumber> with the flight number.
+Replace <Date> with the date in the format YYYY-MM-DD.
+Replace <Time> with the time in the format HH:mm.
+
+In the request body, send the following data:
 {
   "seatsBooked": 2,
   "userId": "60a6dc65f57d3a3fc0e3dbd6"
 }
 
-thus this request will make the booking if the seats are avaliable in the particular flight.
+This request will make a booking if the specified number of seats is available on the flight.
 
-3.My Booking -> to list out all the bookings made by that user
+3. My Bookings
 
-here use the GET method with userId in the params as the userId(ObjectId) will be the reference and the key to list the bookings
-URLhttp:/localhost:3000/myBookings/userId 
-ex:http:/localhost:3000/myBookings/60a6dc65f57d3a3fc0e3dbd6
+To list all the bookings made by a user, use the GET method with the following URL:
+
+http://localhost:3000/myBookings/<userId>
+
+Replace <userId> with the user's ObjectId (reference key).
+This endpoint retrieves all the bookings associated with the specified user.
 
 
 ADMIN USE CASES
 ---------------
 
-1.Add Flights
+1. Add Flights
+To add new flights, use the POST method with the following URL:
 
-here by post method and the flight details in the body we are adding new flights url:http:/localhost:3000/flights
-with the data: FlightNumber(unique),source,destination,DepatureTime,ArrivalTime,seatsAvaliable(default:60).
-example:
-{       "flightNumber": "121",
-        "source": "cbe",
-        "destination": "chennai",
-        "departureTime": "2023-05-10T10:30:00.000Z",
-        "arrivalTime": "2023-05-11T05:45:00.000Z",
-        "seatsAvailable": 30
+http://localhost:3000/flights
+
+In the request body, provide the flight details, including:
+
+{
+  "flightNumber": "121",
+  "source": "cbe",
+  "destination": "chennai",
+  "departureTime": "2023-05-10T10:30:00.000Z",
+  "arrivalTime": "2023-05-11T05:45:00.000Z",
+  "seatsAvailable": 30
 }
+Ensure that the flight number is unique. This request adds a new flight to the system.
 
-2.Remove Flights
+2. Remove Flights
+   
+To remove flights, use the DELETE method with the following URL format:
 
-here by delete method http:/localhost:3000/flights/delete/:flightNumber we find the flights by unique flight numbers 
-example:http://localhost:3000/flights/delete/121
+http://localhost:3000/flights/delete/<flightNumber>
 
-3.View all the booking based on flight number and time
+Replace <flightNumber> with the unique flight number of the flight to be deleted.
 
-here we are using GET method so the flight number and time should be send as params http:/localhost:3000/bookings/:flightNumber/:date/:time
-like http://localhost:3000/bookings/DL104/2022-05-11/08:00
+This request deletes the specified flight from the system.
 
-as in booking schema the flight is given as refernce the filght number will be searched in the booking collection 
+3. View All Bookings Based on Flight Number and Time
 
-4.TO GET ALL the flights 
-here we use the simple GET method to get all the flights in the db url http:/localhost:3000/flights
- this returns the response as all the flights will be listed. 
- 
+To view all bookings for a specific flight based on flight number and time, use the GET method with the following URL format:
 
+http://localhost:3000/bookings/<flightNumber>/<date>/<time>
+
+Replace <flightNumber> with the flight number.
+Replace <date> with the date in the format YYYY-MM-DD.
+Replace <time> with the time in the format HH:mm.
+
+This endpoint retrieves all bookings for the specified flight and time.
+
+4. Get All Flights
+
+To retrieve a list of all flights in the database, use the GET method with the following URL:
+
+http://localhost:3000/flights
+
+This endpoint returns a response listing all flights stored in the database.
+
+Feel free to explore these endpoints to interact with the Flight Ticket Booking application.
 
 
