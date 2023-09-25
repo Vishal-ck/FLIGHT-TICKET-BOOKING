@@ -21,10 +21,12 @@ This endpoint filters flights based on the provided date and time.
 
 To book tickets on a flight, use the POST method with the following URL format:
 
-http://localhost:3000/bookings/<flightNumber>/<Date>/<Time>
+http://localhost:3000/bookings/flightNumber/Date/Time
 
 Replace <flightNumber> with the flight number.
+
 Replace <Date> with the date in the format YYYY-MM-DD.
+
 Replace <Time> with the time in the format HH:mm.
 
 In the request body, send the following data:
@@ -39,9 +41,10 @@ This request will make a booking if the specified number of seats is available o
 ------------------------------------------------------------------------------------------
 To list all the bookings made by a user, use the GET method with the following URL:
 
-http://localhost:3000/myBookings/<userId>
+http://localhost:3000/myBookings/userId
 
 Replace <userId> with the user's ObjectId (reference key).
+
 This endpoint retrieves all the bookings associated with the specified user.
 
 
@@ -64,14 +67,16 @@ In the request body, provide the flight details, including:
   "arrivalTime": "2023-05-11T05:45:00.000Z",
   "seatsAvailable": 30
 }
-Ensure that the flight number is unique. This request adds a new flight to the system.
+Ensure that the flight number is unique. 
+
+This request adds a new flight to the system.
 
 2.REMOVE FLIGHTS
 -------------------------------------------------------------------------------------------
 
 To remove flights, use the DELETE method with the following URL format:
 
-http://localhost:3000/flights/delete/<flightNumber>
+http://localhost:3000/flights/delete/flightNumber
 
 Replace <flightNumber> with the unique flight number of the flight to be deleted.
 
@@ -82,10 +87,12 @@ This request deletes the specified flight from the system.
 
 To view all bookings for a specific flight based on flight number and time, use the GET method with the following URL format:
 
-http://localhost:3000/bookings/<flightNumber>/<date>/<time>
+http://localhost:3000/bookings/flightNumber/date/time
 
 Replace <flightNumber> with the flight number.
+
 Replace <date> with the date in the format YYYY-MM-DD.
+
 Replace <time> with the time in the format HH:mm.
 
 This endpoint retrieves all bookings for the specified flight and time.
